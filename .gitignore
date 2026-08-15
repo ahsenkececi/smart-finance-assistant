@@ -1,0 +1,48 @@
+# ===== Python / Backend =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Alembic (keep migration files, ignore local sqlite if ever used for testing)
+*.db
+*.sqlite3
+
+# ===== Node / Frontend =====
+node_modules/
+dist/
+build/
+.vite/
+*.local
+
+# ===== Environment & Secrets =====
+.env
+.env.*
+!.env.example
+
+# ===== Docker =====
+*.pid
+pgdata/
+
+# ===== IDE / Editor =====
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Logs =====
+*.log
+logs/
