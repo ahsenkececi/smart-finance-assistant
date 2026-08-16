@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.database import get_db
+from app.api.auth import router as auth_router
 
 app = FastAPI(
     title=settings.app_name,
@@ -11,6 +12,7 @@ app = FastAPI(
     version="0.1.0",
 )
 
+app.include_router(auth_router)
 
 @app.get("/health")
 def health_check(db: Session = Depends(get_db)):
