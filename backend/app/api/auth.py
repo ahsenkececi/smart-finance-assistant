@@ -19,6 +19,20 @@ def register(payload: UserCreate, db: Session = Depends(get_db)):
             detail="A user with this email already exists.",
         )
 
+@router.post("/login", response_model=Token)
+def login(payload: UserLogin, db: Session = Depends(get_db)):
+    user = db.execute(select(User).where(User.email == payload.email)).scalar_one_or_none()
+
+    if not user or not verify_password(payload.password, user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password.",
+        )
+
+    access_token = create_access_token(user_id=user.id)
+    return Token(access_token=access_token)
+
+
     user = User(
         name=payload.name,
         email=payload.email,
