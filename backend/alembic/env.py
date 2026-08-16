@@ -14,6 +14,7 @@ from app.core.config import settings
 from app.core.database import Base
 # Import all models here so Alembic's autogenerate can detect them.
 # (currently empty — will add `from app.models.user import User` etc. in Phase 2)
+from app.models.user import User
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
