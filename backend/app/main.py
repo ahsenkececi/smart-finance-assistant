@@ -1,6 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from sqlalchemy import text
+from sqlalchemy.orm import Session
 
 from app.core.config import settings
+from app.core.database import get_db
 
 app = FastAPI(
     title=settings.app_name,
@@ -10,13 +13,19 @@ app = FastAPI(
 
 
 @app.get("/health")
-def health_check():
+def health_check(db: Session = Depends(get_db)):
     """
-    Basic liveness check. Returns app status and environment.
-    Will later be extended to check database connectivity.
+    Liveness check that also verifies database connectivity.
     """
+    db_status = "ok"
+    try:
+        db.execute(text("SELECT 1"))
+    except Exception:
+        db_status = "unreachable"
+
     return {
         "status": "ok",
         "app": settings.app_name,
         "environment": settings.environment,
+        "database": db_status,
     }

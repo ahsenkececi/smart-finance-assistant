@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     environment: str = "development"
 
     # Database
-    database_url: str = "postgresql://postgres:postgres@localhost:5432/smart_finance"
+    database_url: str = "postgresql://postgres:postgres@localhost:5433/smart_finance"
 
     # Auth (used starting Phase 2, defined now so .env structure is stable)
     jwt_secret: str = "change-me-in-env"
